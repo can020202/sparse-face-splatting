@@ -47,7 +47,7 @@ Its the same for this repo.
 - Install PyTorch Cuda with your GPU version (e.g. 11.8, 12.4, 12.6) https://pytorch.org/get-started/locally/
 - Install the requirements with requirements.bat / requirements.sh (just run the file)
 
-Most Important Files Description:
+Most Important Files and Directory Description:
 - Sapiens-Pytorch-Inference: Contains Files for running the Models from Meta's Sapiens Human Vision Foundation Collection. (https://arxiv.org/abs/2408.12569)
 We used the Segmentation and Depth Map Models. To generate a segmentation mask and a depth map for each image run: 
 ```python utils/make_depth_maps   input_imgs/ out_depth/ out_seg/``` this generates the depth maps and segmentation masks at the two out paths.
