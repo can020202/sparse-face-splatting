@@ -1,0 +1,17 @@
+1:
+base_prompt = "Create an image of phol person of upper body"
+content_prompt = "of upper body as a super hero with a cape."
+style_prompt = "Use realistic digital painting in sci-fi style."
+scenery_prompt = "Set in a bustling cityscape teeming with dynamic energy, urban vibrancy and towering skyscrapers."
+
+2:
+base_prompt = "Create an image of phol person of upper body"
+content_prompt = "as a noble Jedi knight wielding a glowing lightsaber."
+style_prompt = "Use photo-realistic style with ultra-quality and sharp focus."
+scenery_prompt = "Set in a futuristic spacecraft, interstellar vessels, or space station, showcasing advanced technology and sleek designs."
+
+3:
+base_prompt = "Create an image of phol person of upper body"
+content_prompt = "as an angel."
+style_prompt = "Use  art style of Final Fantasy featuring intricate, highly detailed characters and environments, using dramatic lighting."
+scenery_prompt = "Set in a  celestial realm with shimmering stars, radiant galaxies, and ethereal beings like celestial guardians and cosmic entities."

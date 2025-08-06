@@ -1,0 +1,81 @@
+Bootstrap: docker
+From: pytorch/pytorch:2.3.1-cuda11.8-cudnn8-devel
+
+%files
+    submodules/simple-knn                             /workspace/p5/p5_gaussian_splatting/submodules/simple-knn
+    submodules/fused-ssim                             /workspace/p5/p5_gaussian_splatting/submodules/fused-ssim
+    submodules/diff-gaussian-rasterization            /workspace/p5/p5_gaussian_splatting/submodules/diff-gaussian-rasterization
+    requirements.txt                                  /workspace/p5/p5_gaussian_splatting/requirements.txt
+
+%post
+    export DEBIAN_FRONTEND=noninteractive
+
+    # Install gcc-10 g++-10
+    apt update && apt install -y gcc-10 g++-10
+    export CC=/usr/bin/gcc-10
+    export CXX=/usr/bin/g++-10
+    export CUDAHOSTCXX=/usr/bin/g++-10
+
+    # Install basic dependencies
+    #python3-pip python3.12-venv \
+    apt update && apt install -y --no-install-recommends \
+        git \
+        cmake \
+        ninja-build \
+        build-essential \
+        libboost-program-options-dev \
+        libboost-filesystem-dev \
+        libboost-graph-dev \
+        libboost-system-dev \
+        libeigen3-dev \
+        libflann-dev \
+        libfreeimage-dev \
+        libmetis-dev \
+        libgoogle-glog-dev \
+        libgtest-dev \
+        libgmock-dev \
+        libsqlite3-dev \
+        libglew-dev \
+        qtbase5-dev \
+        libqt5opengl5-dev \
+        libcgal-dev \
+        libceres-dev
+
+    # COLMAP (headless) aus Source bauen
+    git clone https://github.com/colmap/colmap.git
+    cd colmap
+    mkdir build
+    cd build
+    cmake .. -GNinja -DCUDA_ENABLED=ON -DCMAKE_CUDA_ARCHITECTURES=75
+    ninja
+    ninja install
+
+    # Cleanup
+    apt clean
+    rm -rf /var/lib/apt/lists/*
+
+    export TORCH_CUDA_ARCH_LIST="7.5;8.6"
+
+    # Python-Umgebung
+    #python3 -m venv /opt/venv
+    #. /opt/venv/bin/activate
+    pip install --upgrade pip setuptools wheel
+    pip install cmake ninja pybind11 scikit-build
+    pip install --no-cache-dir jupyter jupyterlab
+    pip install --no-cache-dir \
+        torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+
+    # Projekt-Submodule & Requirements
+    cd /workspace/p5/p5_gaussian_splatting
+    pip install --no-build-isolation --no-cache-dir \
+        ./submodules/simple-knn \
+        ./submodules/fused-ssim \
+        ./submodules/diff-gaussian-rasterization
+    pip install --no-cache-dir -r requirements.txt
+
+%environment
+    export LC_ALL=C
+
+%runscript
+    # In diesem Container ausgeführte Befehle landen hier
+    exec "$@"
