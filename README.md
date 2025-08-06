@@ -55,13 +55,13 @@ If you run it the first time, it will download the models from Huggingface.
 
 - arguments: contains the arguments file for training Gaussian Splatting
 
-- data: contains the data for the Gaussian Splatting (Face Picutres of us and our Test subjects with the generated depth maps and segmentation masks)
+- data: contains the data for the Gaussian Splatting (Here only Chessboard Calibration Data but normally Face Pictures of our Test subjects and us with the generated depth maps and segmentation masks)
 
 - notebooks: contains the notebooks for analyis and the User Study.
 
 - outputs: would contain outsputs of the models, but we did not push it because its to much and to big for all the runs.
 
-- scene: contains the scene utils for Gaussian Splatting like loading scenes and camera positions..
+- scene: contains the scene utils for Gaussian Splatting like loading scenes and camera positions.
 
 - utils: contains the utils for Gaussian Splatting like rendering, creating intermediate views, making depth maps...
 
