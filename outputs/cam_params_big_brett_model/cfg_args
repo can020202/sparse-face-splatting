@@ -1,0 +1,1 @@
+Namespace(sh_degree=3, source_path='C:\\Users\\can-e\\PycharmProjects\\p5_gaussian_splatting\\data\\cam_params_big_brett', model_path='outputs/cam_params_big_brett_model', images='images', depths='', resolution=-1, white_background=False, train_test_exp=False, data_device='cuda', eval=True)
